@@ -1,5 +1,8 @@
 div{
     margin-top: 40px;
     margin-bottom: auto;
-    background-color: rgb(230, 96, 44);
+}
+body{
+    background-attachment: fixed;
+    background-color: aquamarine;
 }
