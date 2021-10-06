@@ -11,5 +11,5 @@ phases:
     
   post_build:
     commands:
-      python python.py
+      python update.py
 
