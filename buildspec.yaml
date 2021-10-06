@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - git clone https://github.com/Tarini-27/tarini_website.git 
-      - cd tarini_website.git
+      - cd tarini_website
       - file_name= $(git diff --name-only HEAD^)
       - echo $file_name
       - export $file_name
