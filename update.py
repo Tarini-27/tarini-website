@@ -9,7 +9,7 @@ lb = boto3.client('lambda')
 
 def lambda_handler(event, context):
     file_extension_allowed = [".py"]
-    fileNames_allowed = ["function", "function1"]
+    fileNames_allowed = ["function.py", "function1.py"]
     path=os.environ('file_name')
     print(path)
     for i in path:
