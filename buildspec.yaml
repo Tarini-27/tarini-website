@@ -7,9 +7,9 @@ phases:
   build:
     commands:
       - git clone https://github.com/Tarini-27/tarini_website.git 
-      - export c1=git log -1 | grep ^commit | cut -d " " -f 2 
-      - export c2=git log -2 | grep ^commit | cut -d " " -f 2 
-      - export file_name=git diff $c1 $c2
+      - c1=git log -1 | grep ^commit | cut -d " " -f 2 
+      - c2=git log -2 | grep ^commit | cut -d " " -f 2 
+      - export file_name=git diff --name-only $c1 $c2
     
   post_build:
     commands:
@@ -18,4 +18,4 @@ phases:
 artifacts:
   type: zip
     files:
-      **/*
+      **/**
