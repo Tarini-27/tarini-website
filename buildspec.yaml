@@ -7,7 +7,7 @@ phases:
       - cd tarini_website
       - file_name=$(git diff --name-only HEAD^)
       - echo $file_name
-      - export $file_name
+      - export file_name
     
   post_build:
     commands:
