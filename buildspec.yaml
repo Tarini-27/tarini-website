@@ -7,8 +7,8 @@ phases:
       - ls
       - git clone "https://github.com/Tarini-27/tarini_website.git"
       - cd tarini_website
-      - name=$(git diff --name-only HEAD HEAD^)
-      - export name
+      - file_name=$(git diff --name-only HEAD HEAD^)
+      - export file_name
   post_build:
     commands:
       - python --version
