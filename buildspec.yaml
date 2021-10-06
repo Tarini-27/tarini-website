@@ -1,20 +1,19 @@
 version: 0.2
 phases:
-      
+  # install:
+  #   commands:
   build:
     commands:
-      - git clone https://github.com/Tarini-27/tarini_website.git 
+      - ls
+      - git clone "https://github.com/Tarini-27/tarini_website.git"
       - cd tarini_website
-      - file_name=$(git diff --name-only HEAD^)
-      - echo $file_name
-      - export file_name
-    
+      - name=$(git diff --name-only HEAD HEAD^)
+      - export name
   post_build:
     commands:
+      - python --version
       - python update.py
-      
 artifacts:
   type: zip
   files:
     - '**/*'
-
