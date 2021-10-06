@@ -1,0 +1,21 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+      
+  build:
+    commands:
+      - git clone https://github.com/Tarini-27/tarini_website.git 
+      - export c1=git log -1 | grep ^commit | cut -d " " -f 2 
+      - export c2=git log -2 | grep ^commit | cut -d " " -f 2 
+      - export file_name=git diff $c1 $c2
+    
+  post_build:
+    commands:
+      python python.py
+
+artifacts:
+  type: zip
+    files:
+      **/*
