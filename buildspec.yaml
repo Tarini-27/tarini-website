@@ -9,7 +9,7 @@ phases:
       - echo $file_name
       - export file_name
     
-  post_build:
+   post_build:
     commands:
-      - python3 update.py
+      python update.py
 
