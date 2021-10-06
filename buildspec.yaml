@@ -13,7 +13,3 @@ phases:
     commands:
       python python.py
 
-artifacts:
-  type: zip
-    files:
-      **/**
