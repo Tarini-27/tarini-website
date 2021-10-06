@@ -7,6 +7,7 @@ phases:
   build:
     commands:
       - git clone https://github.com/Tarini-27/tarini_website.git 
+      - cd tarini_website.git
       - c1=git log -1 | grep ^commit | cut -d " " -f 2 
       - c2=git log -2 | grep ^commit | cut -d " " -f 2 
       - export file_name=git diff --name-only $c1 $c2
