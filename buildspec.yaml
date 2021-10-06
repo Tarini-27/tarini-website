@@ -7,11 +7,11 @@ phases:
       - git clone "https://github.com/Tarini-27/tarini_website.git"
       - cd tarini_website
       - file_name=$(git diff --name-only HEAD^)
-      - export file_name
+      - name=$(echo $file_name)
+      - echo $name
+      - name1=$name
+      - export name1
   post_build:
     commands:
       - python update.py
-artifacts:
-  type: zip
-  files:
-    - '**/*'
+
