@@ -17,7 +17,7 @@ def lambda_handler(event, context):
             filename = os.path.basename(path)
             filename = os.split('.')
             filename = zipfile.Zipfile(filename[0], 'w', compression=ZIP_STORED)
-            s3.upload_file('filename', 'sunlife-cybersec-pe-freshers-backup', '2021')
+            s3.upload_file('filename', 'sunlife-cybersec-pe-freshers-backup', 'filename')
             print("file uploaded to s3 successfully")
         else:
             print("not appropriate file modified")
