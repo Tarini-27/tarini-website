@@ -18,6 +18,7 @@ def get_job(filename):
     return response
 
 
+
 for i in path:
     if i in fileNames_allowed:
             filename = os.path.basename(i)
@@ -48,6 +49,8 @@ for i in path:
                 }
                 )
                 print(response)
+    else:
+        print("error")
             
 
 
