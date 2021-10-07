@@ -6,6 +6,10 @@ import zipfile
 gl = boto3.client('glue')
 s3 = boto3.client('s3')
 lb = boto3.client('lambda')
+fileNames_allowed = ["function.py", "update.py"]
+path=os.environ('name1')
+path=path.split(' ')
+print(path, flush=True)
 
 def get_job(filename):
     response = gl.get_job(
@@ -13,13 +17,9 @@ def get_job(filename):
     )
     return response
 
-def handler(event, context):
-    fileNames_allowed = ["function.py", "update.py"]
-    path=os.environ('name1')
-    path=path.split(' ')
-    print(path)
-    for i in path:
-        if i in fileNames_allowed:
+
+for i in path:
+    if i in fileNames_allowed:
             filename = os.path.basename(i)
             #filename = filename.split('.')
             #filename = filename[0]
