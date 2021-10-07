@@ -26,7 +26,7 @@ def lambda_handler(event, context):
             if glue_job:
                 response = gl.start_job_run(
                 JobName=filename)
-                print("job started successfully")
+                print(response)
             else:
                 response = gl.create_job(
                 Name=filename,
@@ -37,7 +37,7 @@ def lambda_handler(event, context):
                     'PythonVersion': '3'
                 }
                 )
-                print("job created successfully")
+                print(response)
             
 
 def get_job(filename):
