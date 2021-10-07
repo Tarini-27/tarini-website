@@ -6,7 +6,7 @@ import zipfile
 gl = boto3.client('glue')
 s3 = boto3.client('s3')
 lb = boto3.client('lambda')
-fileNames_allowed = ["function.py", "update.py"]
+fileNames_allowed = ["function.py", "update.py", "test.txt"]
 print(os.environ['NAME1'], flush=True)
 path=os.environ['NAME1']
 path=path.split(' ')
