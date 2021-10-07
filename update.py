@@ -13,12 +13,23 @@ path=path.split(' ')
 print(path, flush=True)
 
 def get_job(filename):
-    response = gl.get_job(
-    JobName=filename
-    )
-    return response
-
-
+    try:
+        response = gl.get_job(
+        JobName=filename
+        )
+        return response
+    except:
+        response = gl.create_job(
+        Name=filename,
+        Role='arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
+        Command={
+            'Name': 'glueetl',
+            'ScriptLocation': 's3://sunlife-lambda-deploy',
+            'PythonVersion': '3'
+            }
+        )
+        print("job created")
+        return response
 
 for i in path:
     if i in fileNames_allowed:
@@ -32,25 +43,13 @@ for i in path:
             
             filename = filename.split('.')
             filename = filename[0]
-            
             glue_job = get_job(filename)
-
-            try:
-                if glue_job is not None:
-                    response = gl.start_job_run(
-                    JobName=filename)
-                    print(response)
-            except:
-                response = gl.create_job(
-                Name=filename,
-                Role='arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
-                Command={
-                    'Name': 'glueetl',
-                    'ScriptLocation': 's3://sunlife-lambda-deploy',
-                    'PythonVersion': '3'
-                }
-                )
-                print(response)
+            
+            if glue_job is not None:
+                response = gl.start_job_run(
+                JobName=filename)
+                print("job started successfully")
+                  
     else:
         print("error")
             
