@@ -6,21 +6,21 @@ import zipfile
 gl = boto3.client('glue')
 s3 = boto3.client('s3')
 lb = boto3.client('lambda')
-fileNames_allowed = ["function.py", "update.py", "test.txt"]
+
+fileNames_allowed = ["function.py", "update.py", "sunlife-tarini.py"]
 print(os.environ['NAME1'], flush=True)
 path=os.environ['NAME1']
 path=path.split(' ')
+
 print(path, flush=True)
-c=1
+
 def get_job(filename):
     try:
-        c=1
         response = gl.get_job(
         JobName=filename
         )
-        return c
+        return response
     except:
-        c=0
         response = gl.create_job(
         Name=filename,
         Role='arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
@@ -31,29 +31,45 @@ def get_job(filename):
             }
         )
         print("job created")
-        return c
+        return response
+    
+
+def update_job(filename, s3_path):
+    response = gl.update_job(
+        JobName=filename,
+        JobUpdate={
+            'Role': 'arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
+            'Command': {
+             'Name': 'glueetl',
+             'ScriptLocation': s3_path,
+             'PythonVersion': '3'
+            }
+            )
+    return response
+
 
 for i in path:
     if i in fileNames_allowed:
             filename = os.path.basename(i)
             #filename = filename.split('.')
             #filename = filename[0]
-            #filename = zipfile.Zipfile(filename, 'w', compression=ZIP_STORED)
+            filename = zipfile.Zipfile(filename, 'w', compression=ZIP_STORED)
             s3.upload_file(Filename=filename, Bucket='bucket-22097', Key=filename)
+            s3_path = 's3://bucket-22097/{filename}'
             #s3.put_object(Body='i',Bucket='sunlife-cybersec-pe-freshers-backup',Key='i')
             print("file uploaded to s3 successfully")
             
             filename = filename.split('.')
             filename = filename[0]
+
             glue_job = get_job(filename)
             
-            if c:
-                response = gl.start_job_run(
-                JobName=filename)
-                print("job started successfully")
-                  
+            response = update_job(filename, s3_path)
+            print(response)
+            print("job updated successfully")
+           
     else:
-        print("error")
+        print("filename not allowed")
             
 
 
