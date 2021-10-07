@@ -8,7 +8,7 @@ s3 = boto3.client('s3')
 lb = boto3.client('lambda')
 
 def lambda_handler(event, context):
-    fileNames_allowed = ["function.py", "function1.py"]
+    fileNames_allowed = ["function.py", "update.py"]
     path=os.environ('name1')
     path=path.split(' ')
     print(path)
