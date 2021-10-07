@@ -14,4 +14,9 @@ phases:
   post_build:
     commands:
       - python update.py
+ 
+artifacts:
+  type: zip
+    files:
+      **/**
 
