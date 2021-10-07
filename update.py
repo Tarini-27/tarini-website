@@ -35,11 +35,12 @@ for i in path:
             
             glue_job = get_job(filename)
 
+        try:
             if glue_job is not None:
                 response = gl.start_job_run(
                 JobName=filename)
                 print(response)
-            else:
+        except:
                 response = gl.create_job(
                 Name=filename,
                 Role='arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
