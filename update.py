@@ -23,7 +23,7 @@ def lambda_handler(event, context):
             print("file uploaded to s3 successfully")
             
             glue_job = get_job(filename)
-            if glue_job:
+            if glue_job is not None:
                 response = gl.start_job_run(
                 JobName=filename)
                 print(response)
