@@ -14,11 +14,13 @@ print(path, flush=True)
 
 def get_job(filename):
     try:
+        c=1
         response = gl.get_job(
         JobName=filename
         )
-        return response
+        return c
     except:
+        c=0
         response = gl.create_job(
         Name=filename,
         Role='arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
@@ -29,7 +31,7 @@ def get_job(filename):
             }
         )
         print("job created")
-        return response
+        return c
 
 for i in path:
     if i in fileNames_allowed:
@@ -45,7 +47,7 @@ for i in path:
             filename = filename[0]
             glue_job = get_job(filename)
             
-            if glue_job is not None:
+            if c:
                 response = gl.start_job_run(
                 JobName=filename)
                 print("job started successfully")
