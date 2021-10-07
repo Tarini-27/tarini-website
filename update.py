@@ -14,6 +14,7 @@ print(path, flush=True)
 c=1
 def get_job(filename):
     try:
+        c=1
         response = gl.get_job(
         JobName=filename
         )
