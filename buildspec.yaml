@@ -15,8 +15,4 @@ phases:
     commands:
       - python update.py
  
-artifacts:
-  type: zip
-    files:
-      **/**
 
