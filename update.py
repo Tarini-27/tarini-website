@@ -3,7 +3,7 @@ import boto3
 import yaml
 import zipfile
 
-cb = boto3.client('codebuild')
+gl = boto3.client('glue')
 s3 = boto3.client('s3')
 lb = boto3.client('lambda')
 
@@ -15,16 +15,36 @@ def lambda_handler(event, context):
     for i in path:
         if i in fileNames_allowed:
             filename = os.path.basename(i)
-            #filename = filename.split('.')
-            #filename = zipfile.Zipfile(filename[0], 'w', compression=ZIP_STORED)
-            s3.upload_file(Filename='filename', Bucket='sunlife-cybersec-pe-freshers-backup', Key='filename')
+            filename = filename.split('.')
+            filename = filename[0]
+            #filename = zipfile.Zipfile(filename, 'w', compression=ZIP_STORED)
+            s3.upload_file(Filename='filename'+'.zip', Bucket='bucket-22097', Key='filename'+'.zip')
             #s3.put_object(Body='i',Bucket='sunlife-cybersec-pe-freshers-backup',Key='i')
             print("file uploaded to s3 successfully")
-        else:
-            print("not appropriate file modified")
+            
+            glue_job = get_job(filename)
+            if glue_job:
+                response = gl.start_job_run(
+                JobName=filename)
+                print("job started successfully")
+            else:
+                response = gl.create_job(
+                Name=filename,
+                Role='arn:aws:iam::130159455024:role/SunLifeCyberSecurity-Developer-3857',
+                Command={
+                    'Name': 'glueetl',
+                    'ScriptLocation': 's3://sunlife-lambda-deploy',
+                    'PythonVersion': '3'
+                }
+                )
+                print("job created successfully")
+            
 
+def get_job(String filename):
+    response = gl.get_job(
+    JobName=filename
+    )
+    return response
     
             
-            
-
             
