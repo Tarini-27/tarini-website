@@ -9,8 +9,7 @@ phases:
       - file_name=$(git diff --name-only HEAD^)
       - name=$(echo $file_name)
       - echo $name
-      - name1=$name
-      - export name1
+      - export NAME1=$name
   post_build:
     commands:
       - python update.py
