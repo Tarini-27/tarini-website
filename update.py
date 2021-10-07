@@ -44,7 +44,8 @@ def update_job(filename, s3_path):
              'ScriptLocation': s3_path,
              'PythonVersion': '3'
             }
-            )
+          }      
+        )
     return response
 
 
