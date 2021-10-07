@@ -1,6 +1,6 @@
 import json
 import boto3
 def handler(event, context):
-   a=19
+   a=22
    print(a)
    return "added successfully"
