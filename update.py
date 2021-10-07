@@ -11,10 +11,9 @@ print(os.environ['NAME1'], flush=True)
 path=os.environ['NAME1']
 path=path.split(' ')
 print(path, flush=True)
-
+c=1
 def get_job(filename):
     try:
-        c=1
         response = gl.get_job(
         JobName=filename
         )
