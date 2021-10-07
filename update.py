@@ -54,7 +54,8 @@ for i in path:
             filename = os.path.basename(i)
             #filename = filename.split('.')
             #filename = filename[0]
-            #filename = zipfile.Zipfile(filename, 'w', compression=ZIP_STORED)
+            zipfile.ZipFile(filename + '.zip', mode='w').write(filename)
+            filename = filename + '.zip'
             s3.upload_file(Filename=filename, Bucket='bucket-22097', Key=filename)
             s3_path = f's3://bucket-22097/{filename}'
             print(s3_path)
