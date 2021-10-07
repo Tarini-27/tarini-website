@@ -37,9 +37,9 @@ for i in path:
 
             try:
                 if glue_job is not None:
-                response = gl.start_job_run(
-                JobName=filename)
-                print(response)
+                    response = gl.start_job_run(
+                    JobName=filename)
+                    print(response)
             except:
                 response = gl.create_job(
                 Name=filename,
