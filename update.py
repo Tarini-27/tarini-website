@@ -7,7 +7,8 @@ gl = boto3.client('glue')
 s3 = boto3.client('s3')
 lb = boto3.client('lambda')
 fileNames_allowed = ["function.py", "update.py"]
-path=os.environ('name1')
+print(os.environ('NAME1'))
+path=os.environ('NAME1'))
 path=path.split(' ')
 print(path, flush=True)
 
