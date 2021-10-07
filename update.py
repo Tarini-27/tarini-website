@@ -40,7 +40,7 @@ def lambda_handler(event, context):
                 print("job created successfully")
             
 
-def get_job(String filename):
+def get_job(filename):
     response = gl.get_job(
     JobName=filename
     )
