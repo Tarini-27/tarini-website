@@ -7,7 +7,13 @@ gl = boto3.client('glue')
 s3 = boto3.client('s3')
 lb = boto3.client('lambda')
 
-def lambda_handler(event, context):
+def get_job(filename):
+    response = gl.get_job(
+    JobName=filename
+    )
+    return response
+
+def handler(event, context):
     fileNames_allowed = ["function.py", "update.py"]
     path=os.environ('name1')
     path=path.split(' ')
@@ -26,6 +32,7 @@ def lambda_handler(event, context):
             filename = filename[0]
             
             glue_job = get_job(filename)
+
             if glue_job is not None:
                 response = gl.start_job_run(
                 JobName=filename)
@@ -43,11 +50,7 @@ def lambda_handler(event, context):
                 print(response)
             
 
-def get_job(filename):
-    response = gl.get_job(
-    JobName=filename
-    )
-    return response
+
     
             
             
