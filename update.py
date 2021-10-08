@@ -52,8 +52,8 @@ def update_job(filename, s3_path):
 for i in path:
     if i in fileNames_allowed:
             filename = os.path.basename(i)
-            #filename = filename.split('.')
-            #filename = filename[0]
+            filename = filename.split('.')
+            filename = filename[0]
             zipfile.ZipFile(filename + '.zip', mode='w').write(filename)
             filename = filename + '.zip'
             s3.upload_file(Filename=filename, Bucket='bucket-22097', Key=filename)
