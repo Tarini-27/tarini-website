@@ -54,18 +54,14 @@ for i in path:
             filename = os.path.basename(i)
             filename1 = filename.split('.')[0]
             print("filename1 "+ filename1)
-            #filename = filename1[0]
-            zipfile.ZipFile(filename + '.zip', mode='w').write(filename)
-            filename = filename + '.zip'
+            #zipfile.ZipFile(filename + '.zip', mode='w').write(filename)
+            #filename = filename + '.zip'
             print(filename)
             s3.upload_file(Filename=filename, Bucket='bucket-22097', Key=filename)
             s3_path = f's3://bucket-22097/{filename}'
             print(s3_path)
             print("file uploaded to s3 successfully")
             
-            #filename1 = filename.split('.')
-            #filename1 = filename1[0]
-            #print(filename1)
             glue_job = get_job(filename1)
             
             response = update_job(filename1, s3_path)
