@@ -52,10 +52,11 @@ def update_job(filename, s3_path):
 for i in path:
     if i in fileNames_allowed:
             filename = os.path.basename(i)
-            #filename1 = filename.split('.')
+            filename1 = filename.split('.')[0]
+            print("filename1 "+ filename1)
             #filename = filename1[0]
-            zipfile.ZipFile(filename + '.zip', mode='w').write(filename)
-            filename = filename + '.zip'
+            zipfile.ZipFile(filename1 + '.zip', mode='w').write(filename1)
+            filename = filename1 + '.zip'
             print(filename)
             s3.upload_file(Filename=filename, Bucket='bucket-22097', Key=filename)
             s3_path = f's3://bucket-22097/{filename}'
@@ -63,9 +64,9 @@ for i in path:
             #s3.put_object(Body='i',Bucket='sunlife-cybersec-pe-freshers-backup',Key='i')
             print("file uploaded to s3 successfully")
             
-            filename1 = filename.split('.')
-            filename1 = filename1[0]
-
+            #filename1 = filename.split('.')
+            #filename1 = filename1[0]
+            #print(filename1)
             glue_job = get_job(filename1)
             
             response = update_job(filename1, s3_path)
