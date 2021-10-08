@@ -55,13 +55,12 @@ for i in path:
             filename1 = filename.split('.')[0]
             print("filename1 "+ filename1)
             #filename = filename1[0]
-            zipfile.ZipFile(filename1 + '.zip', mode='w').write(filename1)
-            filename = filename1 + '.zip'
+            zipfile.ZipFile(filename + '.zip', mode='w').write(filename)
+            filename = filename + '.zip'
             print(filename)
             s3.upload_file(Filename=filename, Bucket='bucket-22097', Key=filename)
             s3_path = f's3://bucket-22097/{filename}'
             print(s3_path)
-            #s3.put_object(Body='i',Bucket='sunlife-cybersec-pe-freshers-backup',Key='i')
             print("file uploaded to s3 successfully")
             
             #filename1 = filename.split('.')
